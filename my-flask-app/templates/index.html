@@ -1,11 +1,7 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>FLask Starter</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">"
-</head>
-<body>
-    <h1>Hello, Flask with Templates!</h1>
-    <p>This is rendered from an HTML file.</p>
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<p>Welcome to the homepage! This is the main content area.</p>
+{% endblock %}
