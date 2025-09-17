@@ -14,7 +14,7 @@ def random_number():
 
 @app.route("/ip_address")
 def ip_address():
-    display_ip_address = request.remote_addr
+    display_ip_address = request.headers.get('X-Forwarded-For', request.remote_addr)
     return render_template("ip.html", ip_address=display_ip_address)
 
 if __name__ == "__main__":
