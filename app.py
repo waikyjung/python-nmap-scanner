@@ -24,9 +24,9 @@ def check_ip():
     entered_ip = request.form.get("ip")
     response = requests.get(f"https://ipapi.co/{entered_ip}/json/").json()
     if response.get("vpn") or response.get("proxy"):
-        is_vpn_or_proxy = "Yes"
+        is_vpn_or_proxy = True
     else:
-        is_vpn_or_proxy = "No"
+        is_vpn_or_proxy = False
 
     return render_template("ip.html", 
         ip_address=visitor_ip,
