@@ -3,6 +3,20 @@
 {% block title %}IP Address{% endblock %}
 
 {% block content %}
-<p>Your IP Address is: <strong>{{ ip_address }}</strong></p>
-<p>VPN/Proxy Detected: <strong>{{ is_vpn_or_proxy }}</strong></p>
+    <h1>Your IP Info</h1>
+    <p>Your IP Address is: <strong>{{ ip_address }}</strong></p>
+
+    <hr>
+
+    <h2>Check an IP Address</h2>
+    <form method="POST" action="/check_ip">
+        <label for="entered_ip">Enter IP:</label>
+        <input type="text" id="entered_ip" name="ip" placeholder="e.g. 8.8.8.8" value="{{ ip_address }}" required>
+        <button type="submit">Check</button>
+    </form>
+
+    {% if checked_ip %}
+        <h3>Results for {{ checked_ip }}</h3>
+        <p>VPN/Proxy Detected: {{ vpn_status }}</p>
+    {% endif %}
 {% endblock %}

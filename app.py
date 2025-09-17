@@ -13,17 +13,24 @@ def random_number():
     number = random.randint(1, 100)
     return render_template("random.html", random_number=number)
 
-@app.route("/ip_address")
+@app.route("/ip_address", methods=["GET"])
 def ip_address():
-    visitor_ip_address = request.headers.get('X-Forwarded-For', request.remote_addr)
-    response = requests.get(f"https://ipapi.co/{visitor_ip_address}/json/").json()
+    visitor_ip = request.headers.get('X-Forwarded-For', request.remote_addr)
+    return render_template("ip.html", ip_address=visitor_ip)
+
+@app.route("/check_ip", methods=["POST"])
+def check_ip():
+    visitor_ip = request.headers.get('X-Forwarded-For', request.remote_addr)
+    entered_ip = request.form.get("ip")
+    response = requests.get(f"https://ipapi.co/{entered_ip}/json/").json()
     if response.get("vpn") or response.get("proxy"):
-        is_vpn_or_proxy = True
+        is_vpn_or_proxy = "Yes"
     else:
-        is_vpn_or_proxy = False
+        is_vpn_or_proxy = "No"
 
     return render_template("ip.html", 
-        ip_address=visitor_ip_address,
+        ip_address=visitor_ip,
+        checked_ip=entered_ip,
         vpn_status=is_vpn_or_proxy
     )
 
