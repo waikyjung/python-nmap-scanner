@@ -11,12 +11,31 @@
     <h2>Check an IP Address</h2>
     <form method="POST" action="/check_ip">
         <label for="entered_ip">Enter IP:</label>
-        <input type="text" id="entered_ip" name="ip" placeholder="e.g. 8.8.8.8" value="{{ ip_address }}" required>
+        <input type="text" id="entered_ip" name="ip" placeholder="e.g. 8.8.8.8" value="45.33.32.156" required>
         <button type="submit">Check</button>
     </form>
 
     {% if checked_ip %}
         <h3>Results for {{ checked_ip }}</h3>
-        <p>VPN/Proxy Detected: {{ vpn_status }}</p>
+
+        {% if ip_response %}
+            <h4>IP Details:</h4>
+            <table class="center-table" border="1" cellpadding="5" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Field</th>
+                        <th>Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for key, value in ip_response.items() %}
+                        <tr>
+                            <td>{{ key }}</td>
+                            <td>{{ value }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
     {% endif %}
 {% endblock %}

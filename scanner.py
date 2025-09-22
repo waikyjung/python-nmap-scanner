@@ -27,8 +27,9 @@ high_risk_ports = {
   5900: 'VNC'
 }
 ports_to_scan = ','.join(str(port) for port in list(high_risk_ports.keys()))
-#target = "45.33.32.156"
+
 target = input("Enter a IPv4 address to scan: ")
+target = "45.33.32.156"
 
 if is_valid_ipv4(target) == False:
     print(f"\"{target}\" is not a valid IPv4 address.")

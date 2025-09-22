@@ -14,3 +14,12 @@ nav a {
 nav a:hover {
     text-decoration: underline;
 }
+.center-table {
+    margin-left: auto;
+    margin-right: auto;
+    border-collapse: collapse;
+}
+.center-table th, .center-table td {
+    padding: 5px;
+    border: 1px solid white;
+}

@@ -23,15 +23,11 @@ def check_ip():
     visitor_ip = request.headers.get('X-Forwarded-For', request.remote_addr)
     entered_ip = request.form.get("ip")
     response = requests.get(f"https://ipapi.co/{entered_ip}/json/").json()
-    if response.get("vpn") or response.get("proxy"):
-        is_vpn_or_proxy = True
-    else:
-        is_vpn_or_proxy = False
-
+    print(response)
     return render_template("ip.html", 
         ip_address=visitor_ip,
         checked_ip=entered_ip,
-        vpn_status=is_vpn_or_proxy
+        ip_response=response
     )
 
 if __name__ == "__main__":
