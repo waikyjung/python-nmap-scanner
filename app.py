@@ -29,6 +29,7 @@ def check_ip():
     response = requests.get(f"https://ipapi.co/{entered_ip}/json/").json()
     
     #Nmap Scan
+    '''
     vulnerable_ports = {
         21: 'FTP',
         22: 'SSH',
@@ -53,12 +54,13 @@ def check_ip():
             for port in nm[host][proto]:
                 state = nm[host][proto][port]['state'].capitalize()
                 ports_status[f"{vulnerable_ports[port]} ({port})"] = state
-
+    '''
+    
     return render_template("ip.html", 
         ip_address=visitor_ip,
         checked_ip=entered_ip,
         ip_response=response,
-        nmap_response=ports_status
+        #nmap_response=ports_status
     )
 
 if __name__ == "__main__":
